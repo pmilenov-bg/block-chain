@@ -1,0 +1,7 @@
+  920  go run .
+  921  git init
+  922  git add *
+  923  git status
+  924  git commit -m "rev1 from 11-7 and rev2 from 12-7-23"
+  925  git remote add origin git@github.com:pmilenov-bg/hash-chain.git
+  926  git push -u origin master

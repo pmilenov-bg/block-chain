@@ -1,53 +1,53 @@
-package	main
+package main
 
 import (
 	"bufio"
-	"os"
 	"fmt"
+	"hash-chain/src/models"
 	hashGenerator "hash-chain/src/services"
+	print "hash-chain/src/services"
+	"os"
 )
 
-func main()  {
+func main() {
 
 	reader := bufio.NewScanner(os.Stdin)
-	paswordMap := make(map[string]string)
-	reader.Scan()
-	inp := reader.Text()
-	// if err {
-	// 	fmt.Println(err)
-	// }
-	paswordMap[inp] =  hashGenerator.HashString1(inp)
-	passwords := []string{}
-	passwords = append(passwords, inp)
-	count := 0
-	for {
-		fmt.Println("password:")
-		reader.Scan()
-		input := reader.Text()
-		// if err {
-		// 	fmt.Println(err)
-		// }
-		// input =strings.TrimSpace(input)
+	// blockChain := make(map[string]string)
+	var blockChain []models.Block
 
-		if input =="exit" {
-			break
-		}
-		passwords = append(passwords, input)
-		paswordMap[input] = hashGenerator.HashString2(input, paswordMap[passwords[count]]) 
-		count++
+	fmt.Println("data:")
+	reader.Scan()
+	genesisData := models.UserData{
+		Data: reader.Text(),
 	}
 
-	fmt.Println(paswordMap)
-	// reader.Scan()
-	// line := reader.Text()
-	// // if err != nil {
-	// // fmt.Println("Error: %s", err)
-	// // }
-	// hashString := hashGenerator.HashString1(line)
-	// fmt.Println(hashString)
-	
-	// reader.Scan()
-	// line2 := reader.Text()
-	// hashString2 := hashGenerator.HashString2(line2, hashString)
-	// fmt.Println(hashString2)
+	genesisBlock := models.Block{Data: genesisData.ExportToString(),
+		PrevBlockHash: nil,
+		Hash:          []byte(hashGenerator.HashFromString(genesisData.ExportToString())),
+	}
+	blockChain = append(blockChain, genesisBlock)
+
+	for {
+		fmt.Println("data:")
+		reader.Scan()
+		inputData := models.UserData{
+			Data: reader.Text(),
+		}
+
+		if inputData.ExportToString() == "exit" {
+			break
+		}
+
+		previousElementIndex := len(blockChain) - 1
+
+		newBlock := models.Block{
+			Data:          inputData.ExportToString(),
+			PrevBlockHash: blockChain[previousElementIndex].Hash,
+			Hash:          []byte(hashGenerator.HashBlock(genesisData.ExportToString(), []byte(blockChain[previousElementIndex].Hash))),
+		}
+		blockChain = append(blockChain, newBlock)
+	}
+
+	print.PrintFormattedBlocks(blockChain)
+
 }
