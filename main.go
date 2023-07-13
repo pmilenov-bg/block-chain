@@ -4,50 +4,28 @@ import (
 	"bufio"
 	"fmt"
 	"hash-chain/src/models"
-	hashGenerator "hash-chain/src/services"
-	print "hash-chain/src/services"
 	"os"
 )
 
-func main() {
-
+func printBlockChainGenerated() {
+	fmt.Println("BlockChain Generated")
+}
+func getInput() string {
 	reader := bufio.NewScanner(os.Stdin)
-	// blockChain := make(map[string]string)
-	var blockChain []models.Block
-
 	fmt.Println("data:")
 	reader.Scan()
-	genesisData := models.UserData{
-		Data: reader.Text(),
-	}
+	return reader.Text()
+}
 
-	genesisBlock := models.Block{Data: genesisData.ExportToString(),
-		PrevBlockHash: nil,
-		Hash:          []byte(hashGenerator.HashFromString(genesisData.ExportToString())),
-	}
-	blockChain = append(blockChain, genesisBlock)
-
+func main() {
+	blockChain := models.GenerateBlockChain()
+	printBlockChainGenerated()
 	for {
-		fmt.Println("data:")
-		reader.Scan()
-		inputData := models.UserData{
-			Data: reader.Text(),
-		}
-
-		if inputData.ExportToString() == "exit" {
+		inputString := getInput()
+		if inputString == "exit" {
 			break
 		}
-
-		previousElementIndex := len(blockChain) - 1
-
-		newBlock := models.Block{
-			Data:          inputData.ExportToString(),
-			PrevBlockHash: blockChain[previousElementIndex].Hash,
-			Hash:          []byte(hashGenerator.HashBlock(genesisData.ExportToString(), []byte(blockChain[previousElementIndex].Hash))),
-		}
-		blockChain = append(blockChain, newBlock)
+		blockChain.AddBlock(inputString)
 	}
-
-	print.PrintFormattedBlocks(blockChain)
-
+	fmt.Print(blockChain.ToString())
 }

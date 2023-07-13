@@ -3,15 +3,15 @@ package services
 import (
 	"bytes"
 	"crypto/sha256"
-	"encoding/hex"
+	// "encoding/hex"
 )
 
-func HashFromString(message string) string {
+func HashFromString(message string) []byte {
 	h := sha256.New()
 	h.Write([]byte(message))
-	sha1_hash := hex.EncodeToString(h.Sum(nil))
+	// sha1_hash := hex.EncodeToString(h.Sum(nil))
 
-	return sha1_hash
+	return h.Sum(nil)
 }
 
 func HashBlock(data string, prevHash []byte) []byte {
