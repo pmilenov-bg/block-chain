@@ -8,7 +8,7 @@ import (
 
 type Block struct {
 	Data      BlockData
-	Number    int
+	Index     int
 	PrevBlock *Block
 	Hash      []byte
 }
@@ -16,7 +16,7 @@ type Block struct {
 func CreateBlock(strData string, prvBlock Block) Block {
 	newBlock := &Block{
 		Data:      CreateBlockData(strData),
-		Number:    prvBlock.Number + 1,
+		Index:     prvBlock.Index + 1,
 		PrevBlock: &prvBlock,
 		Hash:      services.HashBlock(strData, prvBlock.Hash),
 	}
@@ -29,8 +29,8 @@ func (block *Block) GetPrevBlock() Block {
 
 func (block *Block) ToString() string {
 	str := fmt.Sprintf("Block Data: %s\n", block.Data.ExportToString())
-	str += fmt.Sprintf("Block Number %d\n", block.Number)
-	if block.Number != 1 {
+	str += fmt.Sprintf("Block Index %d\n", block.Index)
+	if block.Index != 1 {
 		str += fmt.Sprintf("PreviousBlock Hash: %s\n", hex.EncodeToString(block.PrevBlock.Hash))
 	} else {
 		str += fmt.Sprintf("PreviousBlock Hash: GenesisBlock\n")

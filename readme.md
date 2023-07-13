@@ -1,37 +1,46 @@
 # Basic BlockChain Terminal Application
 
-Sample Output:
+#### Project made by 2 contributors: ivshil  & pmilenov-bg in pair programming
 
-    { "Initial Message": sha2("Initial Message") } => { "Initial Message": 23123123213 }
-
-    { "Here is another message": sha2("Here is another message"+ "23123123213") => {"Here is another message":  54555555445 }
-
+- Sample Input & Output:
 
         ❯ go run main.go 
+        BlockChain Generated
         data:
-        ok its data
+        Sasho
         data:
-        ok
+        Gosho
         data:
-        no no no
+        Pesho
         data:
         exit
+        
+        BlockChain blocks: 4
+        
+        Block Data: Pesho
+        Block Index 4
+        PreviousBlock Hash: 18dcd1d163e381a77e9d7f82b4e85223df3c19f8029a23b0c7db142726555327
+        Block Hash: d50ebb3c29d800fce66659e386ed0d628340c9a13a031e1cb66de3a2897dc23f
+        
+        
+        Block Data: Gosho
+        Block Index 3
+        PreviousBlock Hash: c42d21517290b18980ab17d362d64f5dac864e8f3e89cc82b0898ec42bde2daf
+        Block Hash: 18dcd1d163e381a77e9d7f82b4e85223df3c19f8029a23b0c7db142726555327
+        
+        
+        Block Data: Sasho
+        Block Index 2
+        PreviousBlock Hash: 81ddc8d248b2dccdd3fdd5e84f0cad62b08f2d10b57f9a831c13451e5c5c80a5
+        Block Hash: c42d21517290b18980ab17d362d64f5dac864e8f3e89cc82b0898ec42bde2daf
+        
+        
+        Block Data: Genesis
+        Block Index 1
+        PreviousBlock Hash: GenesisBlock
+        Block Hash: 81ddc8d248b2dccdd3fdd5e84f0cad62b08f2d10b57f9a831c13451e5c5c80a5
+        
+        
+        End!
 
-        BlockChain blocks: 3
-
-        Block Data: ok its data
-        PreviousBlock Hash: 
-        Block Hash: 65313131646465303164613331383265326662336262326363353466363262653463616135653332326361616233306562386264653465663062373766383430
-
-        Block Data: ok
-        PreviousBlock Hash: 65313131646465303164613331383265326662336262326363353466363262653463616135653332326361616233306562386264653465663062373766383430
-        Block Hash: bf05386e7e3205794b8260c5ed0a10c57a6b31af7928e1ec4fee9f693917e3d6
-
-        Block Data: no no no
-        PreviousBlock Hash: bf05386e7e3205794b8260c5ed0a10c57a6b31af7928e1ec4fee9f693917e3d6
-        Block Hash: e683220ada6cad4861f5d1d5c021040f9801f7103fc06b625fc9bc49a13bb608
-
-In revision 2 we used sha256 
-
-test
-some reference used:   https://jeiwan.net/posts/building-blockchain-in-go-part-1/
+- Some reference used:   https://jeiwan.net/posts/building-blockchain-in-go-part-1/
