@@ -27,5 +27,5 @@ func main() {
 		}
 		blockChain.AddBlock(inputString)
 	}
-	fmt.Print(blockChain.ToString())
+	fmt.Print(blockChain)
 }

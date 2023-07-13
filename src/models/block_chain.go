@@ -32,7 +32,7 @@ func (blockChain *BlockChain) AddBlock(strData string) BlockChain {
 	return *blockChain
 }
 
-func (blockChain *BlockChain) ToString() string {
+func (blockChain *BlockChain) String() string {
 	currentBlock := blockChain.latestBlock
 	result := fmt.Sprintf("\nBlockChain blocks: %d\n\n", currentBlock.Index)
 
@@ -47,3 +47,5 @@ func (blockChain *BlockChain) ToString() string {
 	result += "End!"
 	return result
 }
+
+//recursive display of blockchain

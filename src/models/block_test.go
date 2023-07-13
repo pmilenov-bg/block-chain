@@ -8,9 +8,9 @@ import (
 
 func TestCreateBlock(t *testing.T) {
 	prevBlock := Block{
-		Data:   CreateBlockData("Previous Block"),
-		Number: 1,
-		Hash:   []byte("Previous Hash"),
+		Data:  CreateBlockData("Previous Block"),
+		Index: 1,
+		Hash:  []byte("Previous Hash"),
 	}
 
 	newBlock := CreateBlock("New Block", prevBlock)
@@ -19,8 +19,8 @@ func TestCreateBlock(t *testing.T) {
 		t.Errorf("Expected Data to be 'New Block', but got '%s'", newBlock.Data.ExportToString())
 	}
 
-	if newBlock.Number != 2 {
-		t.Errorf("Expected Number to be 2, but got %d", newBlock.Number)
+	if newBlock.Index != 2 {
+		t.Errorf("Expected Index to be 2, but got %d", newBlock.Index)
 	}
 
 	if newBlock.PrevBlock != &prevBlock {
@@ -38,14 +38,14 @@ func TestCreateBlock(t *testing.T) {
 
 func TestGetPrevBlock(t *testing.T) {
 	prevBlock := Block{
-		Data:   CreateBlockData("Previous Block"),
-		Number: 1,
-		Hash:   []byte("Previous Hash"),
+		Data:  CreateBlockData("Previous Block"),
+		Index: 1,
+		Hash:  []byte("Previous Hash"),
 	}
 
 	block := Block{
 		Data:      CreateBlockData("Block"),
-		Number:    2,
+		Index:     2,
 		PrevBlock: &prevBlock,
 		Hash:      []byte("Block Hash"),
 	}
@@ -59,17 +59,17 @@ func TestGetPrevBlock(t *testing.T) {
 
 func TestToString(t *testing.T) {
 	block := Block{
-		Data:   CreateBlockData("Block Data"),
-		Number: 1,
+		Data:  CreateBlockData("Block Data"),
+		Index: 1,
 		PrevBlock: &Block{
-			Data:   CreateBlockData("Previous Block Data"),
-			Number: 0,
-			Hash:   []byte("Previous Hash"),
+			Data:  CreateBlockData("Previous Block Data"),
+			Index: 0,
+			Hash:  []byte("Previous Hash"),
 		},
 		Hash: []byte("Block Hash"),
 	}
 
-	expectedString := "Block Data: Block Data\nBlock Number 1\nPreviousBlock Hash: GenesisBlock\nBlock Hash: 426c6f636b2048617368\n\n"
+	expectedString := "Block Data: Block Data\nBlock Index 1\nPreviousBlock Hash: GenesisBlock\nBlock Hash: 426c6f636b2048617368\n\n"
 	actualString := block.ToString()
 
 	if actualString != expectedString {

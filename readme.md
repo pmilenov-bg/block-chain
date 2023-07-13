@@ -1,6 +1,11 @@
+- [Basic BlockChain Terminal Application](#basic-blockchain-terminal-application)
+      - [Project made by 2 contributors: ivshil  \& pmilenov-bg in pair programming](#project-made-by-2-contributors-ivshil---pmilenov-bg-in-pair-programming)
+      - [This project was made for training purposes](#this-project-was-made-for-training-purposes)
 # Basic BlockChain Terminal Application
 
+
 #### Project made by 2 contributors: ivshil  & pmilenov-bg in pair programming
+#### This project was made for training purposes
 
 - Sample Input & Output:
 
@@ -42,5 +47,8 @@
         
         
         End!
+
+
+![Alt text](image.png)
 
 - Some reference used:   https://jeiwan.net/posts/building-blockchain-in-go-part-1/
