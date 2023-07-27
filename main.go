@@ -1,31 +1,19 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
-	"hash-chain/src/models"
-	"os"
 )
 
-func printBlockChainGenerated() {
-	fmt.Println("BlockChain Generated")
-}
-func getInput() string {
-	reader := bufio.NewScanner(os.Stdin)
-	fmt.Println("data:")
-	reader.Scan()
-	return reader.Text()
-}
-
 func main() {
-	blockChain := models.GenerateBlockChain()
-	printBlockChainGenerated()
-	for {
-		inputString := getInput()
-		if inputString == "exit" {
-			break
-		}
-		blockChain.AddBlock(inputString)
+	bc := NewBlockchain()
+
+	bc.AddBlock("Send 1 BTC")
+	bc.AddBlock("Send 2 more BTC")
+
+	for _, block := range bc.blocks {
+		fmt.Printf("Prev. hash: %x\n", block.PrevBlockHash)
+		fmt.Printf("Data: %s\n", block.Data)
+		fmt.Printf("Hash: %x\n", block.Hash)
+		fmt.Println()
 	}
-	fmt.Print(blockChain)
 }
