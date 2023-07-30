@@ -4,25 +4,24 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/boltdb/bolt"
+	-"github.com/boltdb/bolt"
 )
 
 const dbFile = "blockchain.db"
 const blocksBucket = "blocks"
 
-// Blockchain keeps a sequence of Blocks
 type Blockchain struct {
 	tip []byte
 	db  *bolt.DB
 }
 
-// BlockchainIterator is used to iterate over blockchain blocks
+
 type BlockchainIterator struct {
 	currentHash []byte
 	db          *bolt.DB
 }
 
-// AddBlock saves provided data as a block in the blockchain
+
 func (bc *Blockchain) AddBlock(data string) {
 	var lastHash []byte
 
@@ -57,14 +56,13 @@ func (bc *Blockchain) AddBlock(data string) {
 	})
 }
 
-// Iterator ...
+
 func (bc *Blockchain) Iterator() *BlockchainIterator {
 	bci := &BlockchainIterator{bc.tip, bc.db}
 
 	return bci
 }
 
-// Next returns next block starting from the tip
 func (i *BlockchainIterator) Next() *Block {
 	var block *Block
 
@@ -85,7 +83,6 @@ func (i *BlockchainIterator) Next() *Block {
 	return block
 }
 
-// NewBlockchain creates a new Blockchain with genesis Block
 func NewBlockchain() *Blockchain {
 	var tip []byte
 	db, err := bolt.Open(dbFile, 0600, nil)

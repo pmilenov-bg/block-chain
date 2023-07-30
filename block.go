@@ -16,7 +16,6 @@ type Block struct {
 	Nonce         int
 }
 
-// Serialize serializes the block
 func (b *Block) Serialize() []byte {
 	var result bytes.Buffer
 	encoder := gob.NewEncoder(&result)
@@ -29,7 +28,6 @@ func (b *Block) Serialize() []byte {
 	return result.Bytes()
 }
 
-// NewBlock creates and returns Block
 func NewBlock(data string, prevBlockHash []byte) *Block {
 	block := &Block{time.Now().Unix(), []byte(data), prevBlockHash, []byte{}, 0}
 	pow := NewProofOfWork(block)
@@ -41,12 +39,10 @@ func NewBlock(data string, prevBlockHash []byte) *Block {
 	return block
 }
 
-// NewGenesisBlock creates and returns genesis Block
 func NewGenesisBlock() *Block {
 	return NewBlock("Genesis Block", []byte{})
 }
 
-// DeserializeBlock deserializes a block
 func DeserializeBlock(d []byte) *Block {
 	var block Block
 
